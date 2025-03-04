@@ -1,0 +1,32 @@
+name: AVR-GCC Build
+
+on:
+  push:
+    branches:
+      - main   # or specify the branch you want to trigger on
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up AVR-GCC
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-avr avr-libc avrdude make
+
+    - name: Build Firmware
+      run: |
+        make
+
+    - name: Upload Firmware Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: firmware
+        path: ./firmware.hex  # Update this with the path to your hex file
