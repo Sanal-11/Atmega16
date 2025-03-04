@@ -26,7 +26,7 @@ jobs:
         make
 
     - name: Upload Firmware Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: firmware
         path: ./firmware.hex  # Update this with the path to your hex file
